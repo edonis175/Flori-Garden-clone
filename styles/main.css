@@ -661,10 +661,6 @@ Media Queries
   padding: 10px 15px;
   border-radius: 30px;
 }
-#header .social {
-  padding-left: 0;
-  gap: 19x;
-}
 #header .social a {
   width: 36px;
   height: 36px;
@@ -673,7 +669,7 @@ Media Queries
 
 #banner {
   background: url(../images/background.png) no-repeat;
-  filter: blur(0.5px);
+  backdrop-filter: blur(500px);
   position: relative;
   background-size: cover;
   background-position: center;
@@ -1436,9 +1432,9 @@ h3 {
 }
 .arts-text {
   max-width: 900px;
-  margin: 40px 0;
+  margin: 40px 0 40px 0;
   text-align: left;
-  padding-left: 16px;
+  padding-left: 200px;
   position: relative;
 }
 .arts-text h2 {
@@ -1463,7 +1459,7 @@ h3 {
   line-height: 1.25;
   letter-spacing: 0;
   color: #333333;
-  margin: -45px 0 0 700px;
+  margin: -55px 0 0 650px;
 }
 
 .arts-buttons {
@@ -1471,7 +1467,7 @@ h3 {
   justify-content: center;
   align-items: center;
   gap: 32px;
-  margin: 10px 0 0 690px;
+  margin: 10px 0 0 950px;
 }
 .arts-buttons p {
   display: inline-block;
@@ -1613,6 +1609,7 @@ h3 {
 
 .arts-leaf-bg {
   position: absolute;
+  margin-top: 25px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1712,12 +1709,10 @@ h3 {
   }
 }
 .latest-works {
-  background: #f8f9ef;
   border-radius: 24px;
   padding: 48px -120px 32px 92px;
   margin: 40px auto;
   max-width: 1200px;
-  box-shadow: 0 4px 24px rgba(55, 72, 54, 0.04);
 }
 .latest-works h2 {
   font-family: "Montserrat", Arial, sans-serif;
@@ -1754,8 +1749,7 @@ h3 {
   height: 400px;
   -o-object-fit: cover;
   object-fit: cover;
-  opacity: 0.3;
-  filter: grayscale(1);
+  opacity: 0.9;
   border-top-left-radius: 24px;
   border-bottom-left-radius: 24px;
 }
@@ -1763,19 +1757,16 @@ h3 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border: 2px solid #374836;
+  transform: translate(-115%, -50%);
+  border: 1px solid #374836;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   font-family: "Montserrat", Arial, sans-serif;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #374836;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(55, 72, 54, 0.07);
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  background: transparent;
   opacity: 1;
 }
 .latest-works .latest-works-gallery .side-image .next-btn:hover {
@@ -1895,7 +1886,7 @@ h3 {
   );
   color: #fff;
   font-family: "Montserrat", Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.3rem;
   letter-spacing: 1px;
 }
@@ -1907,19 +1898,17 @@ h3 {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 44px;
-  height: 44px;
-  background: rgba(255, 255, 255, 0.18);
+  width: 39px;
+  height: 39px;
+  padding-bottom: 6px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: #fff;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(55, 72, 54, 0.1);
-  transition: background 0.2s, color 0.2s;
   margin: 0;
+  backdrop-filter: blur(10px);
+  border: 0.5px dotted #37483698;
 }
 .footer-card p:not(.footer-card-arrow) {
   font-size: 1.25rem;
@@ -1927,6 +1916,10 @@ h3 {
   margin-bottom: 12px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   letter-spacing: 1px;
+}
+.footer-card .footer-card-overlay .footer-card-arrow:hover {
+  background: #3532326b;
+  color: #fff;
 }
 
 .footer {
@@ -2002,32 +1995,19 @@ h3 {
 }
 .footer .footer-brand .footer-subscribe button {
   text-align: center;
-  position: relative;
-  right: 0;
-  border: none;
-  background: #afe692;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  color: #374836;
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: -1px;
-  z-index: 2;
-  box-shadow: 0 2px 8px rgba(55, 72, 54, 0.1);
-  transition: background 0.2s, color 0.2s;
+  transition: transform 0.8s ease;
 }
 .footer .footer-brand .footer-subscribe button p {
   margin: 0;
+  padding-bottom: 5px;
   font-size: 1.5rem;
   font-weight: 700;
+  transition: transform 0.8s ease;
 }
 .footer .footer-brand .footer-subscribe button:hover {
   background: #7bbf5e;
   color: #fff;
+  transform: rotate(-30deg);
 }
 .footer .footer-columns {
   flex: 2;
@@ -2963,6 +2943,7 @@ h3 {
 }
 .footer .footer-brand .footer-subscribe button p {
   margin: 0;
+  padding-bottom: 5px;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -3357,6 +3338,7 @@ h3 {
 }
 .footer .footer-brand .footer-subscribe button p {
   margin: 0;
+  padding-bottom: 5px;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -3761,6 +3743,7 @@ h3 {
 }
 .footer .footer-brand .footer-subscribe button p {
   margin: 0;
+  padding-bottom: 5px;
   font-size: 1.5rem;
   font-weight: 700;
 }
