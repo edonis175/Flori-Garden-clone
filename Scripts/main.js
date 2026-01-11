@@ -131,6 +131,39 @@ initParallaxEffect();
     });
   }
 
+  // Viewport-triggered animation
+  se.onView = function (target, effect, options = {}) {
+    const effectClass = EFFECT_CLASS_MAP[effect];
+    if (!effectClass) return;
+
+    const elements = normalize(target);
+    const { threshold = 0.15, rootMargin = "0px", once = false } = options;
+
+    // Hide elements initially
+    elements.forEach((el) => {
+      el.classList.add("se-hidden");
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            el.classList.remove("se-hidden");
+            const elIndex = elements.indexOf(el);
+            applyAnimation(el, effectClass, options, elIndex);
+            if (once) {
+              observer.unobserve(el);
+            }
+          }
+        });
+      },
+      { threshold, rootMargin }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  };
+
   se.onLoad = function (fn) {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", fn, { once: true });
@@ -152,13 +185,94 @@ se.onLoad(() => {
 
   /* HOME PAGE */
   if (page === "home") {
+    // Header animation on load
     se("#header", "slideDown", {
       duration: 1200,
     });
 
+    // Banner animation on load
     se("#banner .text > *", "riseUp", {
       duration: 1500,
       stagger: 150,
+    });
+
+    // Viewport-triggered animations
+    se.onView("#Welcome", "riseUp", {
+      duration: 800,
+      threshold: 0.4,
+    });
+
+    se.onView(".flori-garten-container .right-stack", "slideRight", {
+      duration: 900,
+      threshold: 0.8,
+    });
+    se.onView(".flori-garten-container .left-stack", "slideLeft", {
+      duration: 900,
+      threshold: 0.8,
+    });
+
+    se.onView(".wishes", "slideRight", {
+      duration: 1000,
+      threshold: 0.3,
+    });
+
+    se.onView(".wishes-buttons p", "slideRight", {
+      duration: 1000,
+      threshold: 0.3,
+    });
+
+    se.onView(".gardening-cards-row .image-card1", "slideLeft", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+
+    se.onView(".gardening-cards-row .image-card2", "riseUp", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+
+    se.onView(".gardening-cards-row .text-card", "slideRight", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+
+    se.onView(".horticulture-wrapper", "riseUp", {
+      duration: 1200,
+      threshold: 0.5,
+    });
+
+    se.onView(".arts", "slideRight", {
+      duration: 1200,
+      threshold: 0.3,
+    });
+
+    se.onView(".arts-cards-row .image-card1", "slideLeft", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+
+    se.onView(".arts-cards-row .arts-card2", "riseUp", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+    se.onView(".arts-text-card ", "slideRight", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+
+    se.onView(".arts-wrapper", "riseUp", {
+      duration: 1000,
+      threshold: 0.8,
+    });
+    se.onView(".latest-works", "slideLeft", {
+      duration: 800,
+      threshold: 0.8,
+    });
+
+    se.onView(".footer-cards .footer-card", "scaleUp", {
+      duration: 700,
+      stagger: 150,
+      threshold: 0.5,
     });
   }
 
@@ -167,11 +281,13 @@ se.onLoad(() => {
     se("#header", "slideDown", {
       duration: 1200,
     });
+
+    se.onView("#about-intro .text > *", "riseUp", {
+      duration: 1500,
+      stagger: 150,
+      threshold: 0.2,
+    });
   }
-  se("#about-intro .text > *", "riseUp", {
-    duration: 1500,
-    stagger: 150,
-  });
 
   /* SERVICES PAGE */
   if (page === "services") {
@@ -186,14 +302,24 @@ se.onLoad(() => {
     const cards = document.querySelectorAll(".service-box");
 
     if (cards.length > 0) {
-      se(cards[0], "slideLeft", { duration: 2000 });
-      se(cards[1], "riseUp", { duration: 2500 });
-      se(cards[2], "slideRight", { duration: 2000 });
+      se.onView(cards[0], "slideLeft", {
+        duration: 2000,
+        threshold: 0.2,
+      });
+      se.onView(cards[1], "riseUp", {
+        duration: 2500,
+        threshold: 0.2,
+      });
+      se.onView(cards[2], "slideRight", {
+        duration: 2000,
+        threshold: 0.2,
+      });
     }
 
-    se(".service-card", "scaleUp", {
+    se.onView(".service-card", "scaleUp", {
       duration: 700,
       stagger: 120,
+      threshold: 0.15,
     });
   }
 
@@ -202,9 +328,11 @@ se.onLoad(() => {
     se("#header", "slideDown", {
       duration: 1200,
     });
+
+    se.onView("#services-cards-container", "riseUp", {
+      duration: 1200,
+      stagger: 150,
+      threshold: 0.2,
+    });
   }
-  se("#contact-banner .text > *", "riseUp", {
-    duration: 1200,
-    stagger: 150,
-  });
 });
